@@ -181,8 +181,8 @@
         "lines": [
           1,
           1,
-          4,
-          4,
+          1,
+          1,
           null,
           null
         ]
@@ -191,8 +191,8 @@
         "lines": [
           1,
           1,
-          2,
-          2,
+          1,
+          1,
           1,
           1,
           null,
@@ -203,7 +203,7 @@
         "lines": [
           1,
           1,
-          4,
+          1,
           1,
           1,
           null,
@@ -214,9 +214,9 @@
         "lines": [
           1,
           1,
-          3,
-          3,
-          3,
+          1,
+          1,
+          1,
           1,
           null,
           null
@@ -226,7 +226,7 @@
         "lines": [
           1,
           1,
-          7,
+          1,
           null,
           null
         ]
@@ -235,9 +235,9 @@
         "lines": [
           1,
           1,
-          2,
-          2,
-          2,
+          1,
+          1,
+          1,
           1,
           null,
           null
@@ -256,6 +256,7 @@
       "/Users/adambailey/Desktop/turing/3mod/projects/rails-engine/app/models/customer.rb": {
         "lines": [
           1,
+          1,
           null
         ]
       },
@@ -272,6 +273,9 @@
           null,
           1,
           1,
+          2,
+          2,
+          null,
           null
         ]
       },
@@ -289,12 +293,20 @@
           null,
           1,
           1,
+          2,
+          2,
+          2,
+          2,
+          null,
           null
         ]
       },
       "/Users/adambailey/Desktop/turing/3mod/projects/rails-engine/app/models/invoice.rb": {
         "lines": [
           1,
+          1,
+          1,
+          null,
           1,
           1,
           null
@@ -305,12 +317,16 @@
           1,
           null,
           1,
+          1,
+          2,
+          2,
           null,
           null
         ]
       },
       "/Users/adambailey/Desktop/turing/3mod/projects/rails-engine/app/models/item.rb": {
         "lines": [
+          1,
           1,
           1,
           null
@@ -321,12 +337,17 @@
           1,
           null,
           1,
+          1,
+          2,
+          2,
           null,
           null
         ]
       },
       "/Users/adambailey/Desktop/turing/3mod/projects/rails-engine/app/models/merchant.rb": {
         "lines": [
+          1,
+          1,
           1,
           null
         ]
@@ -337,6 +358,8 @@
           null,
           1,
           1,
+          2,
+          null,
           null
         ]
       },
@@ -348,6 +371,6 @@
         ]
       }
     },
-    "timestamp": 1679957169
+    "timestamp": 1679958071
   }
 }
