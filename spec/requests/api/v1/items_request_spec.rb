@@ -61,7 +61,7 @@ RSpec.describe 'Items API' do
       get api_v1_item_path(1)
 
       expect(response.status).to eq(404)
-      
+
       parsed_item = JSON.parse(response.body, symbolize_names: true)
 
       expect(parsed_item[:data][:id]).to eq(nil)
@@ -108,7 +108,15 @@ RSpec.describe 'Items API' do
       post api_v1_items_path, headers: headers, params: JSON.generate({ item: item_params })
 
       expect(response.status).to eq(400)
-      expect(response.body).to eq("400 Bad Request")
+
+      parsed_item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_item[:data][:id]).to eq(nil)
+      expect(parsed_item[:data][:type]).to eq("item")
+      expect(parsed_item[:data][:attributes][:name]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:description]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:unit_price]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:merchant_id]).to eq(nil)
     end
 
     it "sends a 400 Bad Request status error when at least one parameter is incorrect data type" do
@@ -126,14 +134,30 @@ RSpec.describe 'Items API' do
       post api_v1_items_path, headers: headers, params: JSON.generate({ item: item_params })
 
       expect(response.status).to eq(400)
-      expect(response.body).to eq("400 Bad Request")
+
+      parsed_item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_item[:data][:id]).to eq(nil)
+      expect(parsed_item[:data][:type]).to eq("item")
+      expect(parsed_item[:data][:attributes][:name]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:description]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:unit_price]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:merchant_id]).to eq(nil)
     end
 
     it "sends a 400 Bad Request status error when no parameters are submitted" do
       post api_v1_items_path
 
       expect(response.status).to eq(400)
-      expect(response.body).to eq("400 Bad Request")
+      
+      parsed_item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_item[:data][:id]).to eq(nil)
+      expect(parsed_item[:data][:type]).to eq("item")
+      expect(parsed_item[:data][:attributes][:name]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:description]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:unit_price]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:merchant_id]).to eq(nil)
     end
   end
 

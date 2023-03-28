@@ -4,15 +4,19 @@ class ApplicationController < ActionController::API
   rescue_from ActionController::ParameterMissing, with: :render_400
 
   def render_404
-    if object_type.include?("item")
-      render json: ItemSerializer.new(Item.new), status: 404
-    else
-      render json: MerchantSerializer.new(Merchant.new), status: 404
-    end
+    render_json_with_status(404)
   end
 
   def render_400
-    render plain: "400 Bad Request", status: 400
+    render_json_with_status(400)
+  end
+
+  def render_json_with_status(status)
+    if object_type.include?("item")
+      render json: ItemSerializer.new(Item.new), status: status
+    else
+      render json: MerchantSerializer.new(Merchant.new), status: status
+    end
   end
 
   def object_type
