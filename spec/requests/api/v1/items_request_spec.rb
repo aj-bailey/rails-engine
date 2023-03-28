@@ -64,4 +64,43 @@ RSpec.describe 'Items API' do
       expect(response.body).to eq("404 Not Found")
     end
   end
+
+  describe "Item Create API" do
+    it "can create a new item" do
+      merchant = create(:merchant)
+      item_params = ({
+                      name: "Item Name",
+                      description: "Item Description",
+                      unit_price: 3.99,
+                      merchant_id: merchant.id
+                    })
+
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      post api_v1_items_path, headers: headers, params: JSON.generate({ item: item_params })
+      created_item = Item.last
+      
+      expect(response).to be_successful
+      expect(created_item.name).to eq(item_params[:name])
+      expect(created_item.description).to eq(item_params[:description])
+      expect(created_item.unit_price).to eq(item_params[:unit_price])
+      expect(created_item.merchant_id).to eq(item_params[:merchant_id])
+    end
+
+    it "sends a 400 Bad Request status error when invalid parameters are submitted" do
+      merchant = create(:merchant)
+      item_params = ({
+                      description: "Item Description",
+                      unit_price: 3.99,
+                      merchant_id: merchant.id
+                    })
+
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      post api_v1_items_path, headers: headers, params: JSON.generate({ item: item_params })
+
+      expect(response.status).to eq(400)
+      expect(response.body).to eq("400 Bad Request")
+    end
+  end
 end
