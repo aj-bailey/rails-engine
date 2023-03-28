@@ -87,7 +87,7 @@ RSpec.describe 'Items API' do
       expect(created_item.merchant_id).to eq(item_params[:merchant_id])
     end
 
-    it "sends a 400 Bad Request status error when invalid parameters are submitted" do
+    it "sends a 400 Bad Request status error when at least one but not all parameters are missing" do
       merchant = create(:merchant)
       item_params = ({
                       description: "Item Description",
@@ -101,6 +101,51 @@ RSpec.describe 'Items API' do
 
       expect(response.status).to eq(400)
       expect(response.body).to eq("400 Bad Request")
+    end
+
+    it "sends a 400 Bad Request status error when at least one parameter is incorrect data type" do
+      #not sure if this is correct way to test this - see unit_price
+      merchant = create(:merchant)
+      item_params = ({
+                      name: "Item Name",
+                      description: "Item Description",
+                      unit_price: "three dollars",
+                      merchant_id: merchant.id
+                    })
+
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      post api_v1_items_path, headers: headers, params: JSON.generate({ item: item_params })
+
+      expect(response.status).to eq(400)
+      expect(response.body).to eq("400 Bad Request")
+    end
+
+    it "sends a 400 Bad Request status error when no parameters are submitted" do
+      post api_v1_items_path
+
+      expect(response.status).to eq(400)
+      expect(response.body).to eq("400 Bad Request")
+    end
+  end
+
+  describe "Item Destroy API" do
+    it "can destroy an item" do
+      item = create(:item)
+
+      expect(Item.count).to eq(1)
+
+      delete api_v1_item_path(item)
+
+      expect(response).to be_successful
+      expect(Item.count).to eq(0)
+      expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "sends a 404 Not Found status when item id not found" do
+      delete api_v1_item_path(1)
+
+      expect(response.status).to eq(404)
     end
   end
 end
