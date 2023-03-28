@@ -45,7 +45,12 @@ RSpec.describe 'Merchant API' do
       get api_v1_merchant_path(1)
 
       expect(response.status).to eq(404)
-      expect(response.body).to eq("404 Not Found")
+
+      parsed_merchant = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_merchant[:data][:id]).to eq(nil)
+      expect(parsed_merchant[:data][:type]).to eq("merchant")
+      expect(parsed_merchant[:data][:attributes][:name]).to eq(nil)
     end
   end
 end

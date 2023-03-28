@@ -61,7 +61,15 @@ RSpec.describe 'Items API' do
       get api_v1_item_path(1)
 
       expect(response.status).to eq(404)
-      expect(response.body).to eq("404 Not Found")
+      
+      parsed_item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_item[:data][:id]).to eq(nil)
+      expect(parsed_item[:data][:type]).to eq("item")
+      expect(parsed_item[:data][:attributes][:name]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:description]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:unit_price]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:merchant_id]).to eq(nil)
     end
   end
 
@@ -146,6 +154,15 @@ RSpec.describe 'Items API' do
       delete api_v1_item_path(1)
 
       expect(response.status).to eq(404)
+
+      parsed_item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_item[:data][:id]).to eq(nil)
+      expect(parsed_item[:data][:type]).to eq("item")
+      expect(parsed_item[:data][:attributes][:name]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:description]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:unit_price]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:merchant_id]).to eq(nil)
     end
   end
 
@@ -169,6 +186,15 @@ RSpec.describe 'Items API' do
       patch api_v1_item_path(1)
 
       expect(response.status).to eq(404)
+
+      parsed_item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed_item[:data][:id]).to eq(nil)
+      expect(parsed_item[:data][:type]).to eq("item")
+      expect(parsed_item[:data][:attributes][:name]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:description]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:unit_price]).to eq(nil)
+      expect(parsed_item[:data][:attributes][:merchant_id]).to eq(nil)
     end
   end
 end
