@@ -226,7 +226,7 @@
         "lines": [
           1,
           1,
-          11,
+          1,
           null,
           null
         ]
@@ -393,50 +393,8 @@
           1,
           null
         ]
-      },
-      "/Users/adambailey/Desktop/turing/3mod/projects/rails-engine/spec/requests/api/v1/merchants_request_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          10,
-          10,
-          null,
-          10,
-          10,
-          null,
-          null,
-          null
-        ]
-      },
-      "/Users/adambailey/Desktop/turing/3mod/projects/rails-engine/app/controllers/api/v1/merchants_controller.rb": {
-        "lines": [
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
-      "/Users/adambailey/Desktop/turing/3mod/projects/rails-engine/app/controllers/application_controller.rb": {
-        "lines": [
-          1,
-          null
-        ]
       }
     },
-    "timestamp": 1679961635
+    "timestamp": 1679964318
   }
 }
