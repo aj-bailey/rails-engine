@@ -25,20 +25,20 @@ RSpec.describe 'Merchant API' do
 
   describe 'Merchant Show API' do
     it 'sends a single merchant by its id' do
-      merchant_1 = create(:merchant)
+      merchant = create(:merchant)
 
-      get api_v1_merchant_path(merchant_1)
+      get api_v1_merchant_path(merchant)
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
 
-      merchant = JSON.parse(response.body, symbolize_names: true)
+      parsed_merchant = JSON.parse(response.body, symbolize_names: true)
 
-      expect(merchant[:id]).to eq(merchant_1.id)
-      expect(merchant[:id]).to be_an(Integer)
+      expect(parsed_merchant[:id]).to eq(merchant.id)
+      expect(parsed_merchant[:id]).to be_an(Integer)
 
-      expect(merchant[:name]).to eq(merchant_1.name)
-      expect(merchant[:name]).to be_a(String)
+      expect(parsed_merchant[:name]).to eq(merchant.name)
+      expect(parsed_merchant[:name]).to be_a(String)
     end
 
     it 'sends a 404 status error when merchant id not found' do
