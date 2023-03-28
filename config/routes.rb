@@ -10,7 +10,7 @@ Rails.application.routes.draw do
         resources :items, only: [:index], controller: "merchant_items"
       end
 
-      resources :items, only: [:index, :show, :create, :destroy]
+      resources :items, only: [:index, :show, :create, :destroy, :update]
     end
   end
 end
