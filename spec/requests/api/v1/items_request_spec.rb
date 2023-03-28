@@ -148,4 +148,27 @@ RSpec.describe 'Items API' do
       expect(response.status).to eq(404)
     end
   end
+
+  describe "Item Update API" do
+    it "can destroy an item" do
+      item = create(:item, name: "original name")
+      
+      item_params = { name: "new name" }
+      headers = { "CONTENT_TYPE" => "application/json" }
+
+      patch api_v1_item_path(item), headers: headers, params: JSON.generate({ item: item_params })
+      item = Item.find(item.id)
+
+      expect(response).to be_successful
+      expect(response.status).to be(200)
+      expect(item.name).to_not eq("original name")
+      expect(item.name).to eq("new name")
+    end
+
+    it "sends a 404 Not Found status when item id not found" do
+      patch api_v1_item_path(1)
+
+      expect(response.status).to eq(404)
+    end
+  end
 end
