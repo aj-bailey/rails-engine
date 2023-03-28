@@ -1,6 +1,3 @@
-# frozen_string_literal: true.
-
-# Invoice model
 class Invoice < ApplicationRecord
   belongs_to :customer
   belongs_to :merchant
