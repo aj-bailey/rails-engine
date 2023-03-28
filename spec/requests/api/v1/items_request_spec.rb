@@ -11,21 +11,21 @@ RSpec.describe 'Items API' do
 
       items = JSON.parse(response.body, symbolize_names: true)
 
-      items.each do |item|
+      items[:data].each do |item|
         expect(item).to have_key(:id)
-        expect(item[:id]).to be_an(Integer)
+        expect(item[:id]).to be_an(String)
 
-        expect(item).to have_key(:name)
-        expect(item[:name]).to be_a(String)
+        expect(item[:attributes]).to have_key(:name)
+        expect(item[:attributes][:name]).to be_a(String)
 
-        expect(item).to have_key(:description)
-        expect(item[:description]).to be_a(String)
+        expect(item[:attributes]).to have_key(:description)
+        expect(item[:attributes][:description]).to be_a(String)
 
-        expect(item).to have_key(:unit_price)
-        expect(item[:unit_price]).to be_a(Float)
+        expect(item[:attributes]).to have_key(:unit_price)
+        expect(item[:attributes][:unit_price]).to be_a(Float)
 
-        expect(item).to have_key(:id)
-        expect(item[:id]).to be_an(Integer)
+        expect(item[:attributes]).to have_key(:merchant_id)
+        expect(item[:attributes][:merchant_id]).to be_an(Integer)
       end
     end
   end
@@ -41,20 +41,20 @@ RSpec.describe 'Items API' do
 
       parsed_item = JSON.parse(response.body, symbolize_names: true)
 
-      expect(parsed_item[:id]).to eq(item.id)
-      expect(parsed_item[:id]).to be_an(Integer)
+      expect(parsed_item[:data][:id]).to eq(item.id.to_s)
+      expect(parsed_item[:data][:id]).to be_an(String)
 
-      expect(parsed_item[:name]).to eq(item.name)
-      expect(parsed_item[:name]).to be_a(String)
+      expect(parsed_item[:data][:attributes][:name]).to eq(item.name)
+      expect(parsed_item[:data][:attributes][:name]).to be_a(String)
 
-      expect(parsed_item[:description]).to eq(item.description)
-      expect(parsed_item[:description]).to be_a(String)
+      expect(parsed_item[:data][:attributes][:description]).to eq(item.description)
+      expect(parsed_item[:data][:attributes][:description]).to be_a(String)
 
-      expect(parsed_item[:unit_price]).to eq(item.unit_price)
-      expect(parsed_item[:unit_price]).to be_a(Float)
+      expect(parsed_item[:data][:attributes][:unit_price]).to eq(item.unit_price)
+      expect(parsed_item[:data][:attributes][:unit_price]).to be_a(Float)
 
-      expect(parsed_item[:merchant_id]).to eq(item.merchant_id)
-      expect(parsed_item[:merchant_id]).to be_a(Integer)
+      expect(parsed_item[:data][:attributes][:merchant_id]).to eq(item.merchant_id)
+      expect(parsed_item[:data][:attributes][:merchant_id]).to be_a(Integer)
     end
 
     it 'sends a 404 status error when item id not found' do

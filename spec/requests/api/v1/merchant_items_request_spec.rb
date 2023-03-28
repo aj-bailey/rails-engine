@@ -12,18 +12,18 @@ RSpec.describe 'Merchant Items API' do
 
       merchant_items = JSON.parse(response.body, symbolize_names: true)
       
-      merchant_items.each do |merchant_item|
+      merchant_items[:data].each do |merchant_item|
         expect(merchant_item).to have_key(:id)
-        expect(merchant_item[:id]).to be_an(Integer)
+        expect(merchant_item[:id]).to be_an(String)
 
-        expect(merchant_item).to have_key(:name)
-        expect(merchant_item[:name]).to be_an(String)
+        expect(merchant_item[:attributes]).to have_key(:name)
+        expect(merchant_item[:attributes][:name]).to be_an(String)
 
-        expect(merchant_item).to have_key(:description)
-        expect(merchant_item[:description]).to be_an(String)
+        expect(merchant_item[:attributes]).to have_key(:description)
+        expect(merchant_item[:attributes][:description]).to be_an(String)
 
-        expect(merchant_item).to have_key(:unit_price)
-        expect(merchant_item[:unit_price]).to be_an(Float)
+        expect(merchant_item[:attributes]).to have_key(:unit_price)
+        expect(merchant_item[:attributes][:unit_price]).to be_an(Float)
       end
     end
 
