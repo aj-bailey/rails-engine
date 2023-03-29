@@ -12,7 +12,11 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def destroy
-    Item.destroy(params[:id])
+    item = Item.find(params[:id])
+    
+    destroy_associated_single_item_invoices
+    
+    Item.destroy(item.id)
 
     render status: 204
   end
@@ -28,5 +32,13 @@ class Api::V1::ItemsController < ApplicationController
   private
   def item_params
     params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
+  end
+
+  def destroy_associated_single_item_invoices
+    item_invoices = Item.find(params[:id]).invoices
+
+    item_invoices.single_item_invoices.each do |single_item_invoice|
+      Invoice.destroy(single_item_invoice.id)
+    end
   end
 end
