@@ -188,6 +188,32 @@ RSpec.describe 'Items API' do
       expect(parsed_item[:data][:attributes][:unit_price]).to eq(nil)
       expect(parsed_item[:data][:attributes][:merchant_id]).to eq(nil)
     end
+
+    it "deletes associated invoices that only have this item on it" do
+      merchant = create(:merchant)
+      to_be_deleted_item = create(:item, merchant: merchant)
+      item_2 = create(:item, merchant: merchant)
+
+      to_be_deleted_invoice_1 = create(:invoice, merchant: merchant)
+      to_be_deleted_invoice_2 = create(:invoice, merchant: merchant)
+      to_be_deleted_invoice_3 = create(:invoice, merchant: merchant)
+
+      invoice_4 = create(:invoice, merchant: merchant)
+
+      create(:invoice_item, item: to_be_deleted_item, invoice: to_be_deleted_invoice_1)
+      create(:invoice_item, item: to_be_deleted_item, invoice: to_be_deleted_invoice_2)
+      create(:invoice_item, item: to_be_deleted_item, invoice: to_be_deleted_invoice_3)
+      create(:invoice_item, item: to_be_deleted_item, invoice: invoice_4)
+      create(:invoice_item, item: item_2, invoice: invoice_4)
+
+      expect(Invoice.count).to eq(4)
+
+      delete api_v1_item_path(to_be_deleted_item)
+
+      expect(response).to be_successful
+      expect(Invoice.count).to eq(1)
+      expect(Invoice.first.id).to eq(invoice_4.id)
+    end
   end
 
   describe "Item Update API" do

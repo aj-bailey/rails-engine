@@ -28,9 +28,7 @@ RSpec.describe Invoice, type: :model do
         create(:invoice_item, item: item_1, invoice: invoice_4)
         create(:invoice_item, item: item_2, invoice: invoice_4)
 
-        expected_results = [invoice_1, invoice_2, invoice_3]
-
-        expect(item_1.invoices.single_item_invoices).to eq(expected_results)
+        expect(item_1.invoices.single_item_invoices).to contain_exactly(invoice_1, invoice_2, invoice_3)
       end
     end
   end
