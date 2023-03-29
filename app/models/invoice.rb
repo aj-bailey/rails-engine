@@ -4,4 +4,11 @@ class Invoice < ApplicationRecord
 
   has_many :invoice_items
   has_many :transactions
+
+  def self.single_item_invoices
+    self.joins(:invoice_items)
+    .select("invoices.*, count(invoice_items.id)")
+    .group(:id)
+    .having('count(invoice_items.id) = ?', 1)
+  end
 end
