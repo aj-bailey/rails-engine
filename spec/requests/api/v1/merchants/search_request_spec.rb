@@ -5,6 +5,7 @@ RSpec.describe "Merchants Search API" do
     it "sends the first merchant found from case-insensitive alphabetical order results" do
       turing = create(:merchant, name: "Turing")
       ring_world = create(:merchant, name: "Ring World")
+      thing_world = create(:merchant, name: "Thing World")
 
       get "/api/v1/merchants/find?name=ring"
 
