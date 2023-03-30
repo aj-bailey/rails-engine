@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'Merchant Items API' do
-  describe 'Merchant Items Index API' do
-    it 'sends a list of merchant items' do
+RSpec.describe "Merchant Items API" do
+  describe "Merchant Items Index API" do
+    it "sends a list of merchant items" do
       merchant = create(:merchant)
       create_list(:item, 4, merchant: merchant)
 
@@ -27,7 +27,7 @@ RSpec.describe 'Merchant Items API' do
       end
     end
 
-    it 'sends a 404 status error when merchant id not found' do
+    it "sends a 404 status error when merchant id not found" do
       get api_v1_merchant_items_path(1)
 
       expect(response.status).to eq(404)

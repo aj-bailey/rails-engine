@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'Items Merchant API' do
-  describe 'Items Merchant Index API' do
-    it 'sends the merchant of an item' do
+RSpec.describe "Items Merchant API" do
+  describe "Items Merchant Index API" do
+    it "sends the merchant of an item" do
       merchant = create(:merchant)
       item = create(:item, merchant: merchant)
 
@@ -19,7 +19,7 @@ RSpec.describe 'Items Merchant API' do
       expect(item_merchant[:data][:attributes][:name]).to be_a(String)
     end
 
-    it 'sends a 404 status error when item id not found' do
+    it "sends a 404 status error when item id not found" do
       get api_v1_item_merchant_index_path(1)
 
       expect(response.status).to eq(404)
