@@ -1,0 +1,39 @@
+AllCops:
+  Exclude:
+    - 'db/**/*.rb'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Layout/TrailingEmptyLines:
+  Enabled: false
+
+Layout/TrailingBlankLines:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/BlockLength:
+  Max: 250
+
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+Naming/VariableNumber:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/RegexpLiteral:
+  EnforcedStyle: slashes
+
+Style/AndOr:
+  EnforcedStyle: conditionals
