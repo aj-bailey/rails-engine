@@ -9,6 +9,6 @@ class Invoice < ApplicationRecord
     joins(:invoice_items)
       .select("invoices.*, count(invoice_items.id)")
       .group(:id)
-      .having('count(invoice_items.id) = ?', 1)
+      .having("count(invoice_items.id) = ?", 1)
   end
 end

@@ -11,21 +11,21 @@ class Api::V1::Items::SearchController < Api::ApiController
   private
 
   def execute_query
-    if has_name_param?
+    if name_param?
       Item.find_items_by_name(params[:name])
-    elsif has_min_price_param? && has_max_price_param?
+    elsif min_price_param? && max_price_param?
       min_and_max_price
-    elsif has_min_price_param?
+    elsif min_price_param?
       min_price
-    elsif has_max_price_param?
+    elsif max_price_param?
       max_price
     end
   end
 
   def valid_query_params?
-    if has_name_param? && (has_min_price_param? || has_max_price_param?)
+    if name_param? && (min_price_param? || max_price_param?)
       return false
-    elsif !has_name_param? && !has_min_price_param? && !has_max_price_param?
+    elsif !name_param? && !min_price_param? && !max_price_param?
       return false
     end
 
@@ -56,15 +56,15 @@ class Api::V1::Items::SearchController < Api::ApiController
     false
   end
 
-  def has_name_param?
+  def name_param?
     params.keys.include?("name")
   end
 
-  def has_min_price_param?
+  def min_price_param?
     params.include?("min_price")
   end
 
-  def has_max_price_param?
+  def max_price_param?
     params.include?("max_price")
   end
 end
