@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Merchants Search API" do
-  describe "Merchants Search Show API" do
+  describe "Merchants Search Index API" do
     it "sends the first merchant found from case-insensitive alphabetical order results" do
       turing = create(:merchant, name: "Turing")
       ring_world = create(:merchant, name: "Ring World")
