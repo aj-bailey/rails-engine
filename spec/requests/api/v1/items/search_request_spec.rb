@@ -54,7 +54,7 @@ RSpec.describe "Items Search API" do
         @turing_hat = create(:item, name: "Turing Hat", unit_price: 19.99)
         @turing_shirt = create(:item, name: "Turing Shirt", unit_price: 24.99)
         @gold_ring = create(:item, name: "Gold Ring", unit_price: 74.99)
-        @thing = create(:item, name: "Thing", unit_price: 10000.99)
+        @thing = create(:item, name: "Thing", unit_price: 10_000.99)
       end
 
       it "returns an array of all items greater than min price parameter given" do
@@ -84,7 +84,7 @@ RSpec.describe "Items Search API" do
 
       it "returns an array of all items less than max price parameter given" do
         get "/api/v1/items/find_all?max_price=50"
-        
+
         expect(response).to be_successful
         expect(response.status).to eq(200)
 
@@ -169,7 +169,7 @@ RSpec.describe "Items Search API" do
 
     it "returns a 400 error when min or max parameters are less than 0" do
       get "/api/v1/items/find_all?min_price=-1"
-      
+
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
 
@@ -181,7 +181,7 @@ RSpec.describe "Items Search API" do
 
     it "returns a 400 error when max parameters are less than 0" do
       get "/api/v1/items/find_all?max_price=-1"
-      
+
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
 
@@ -193,7 +193,7 @@ RSpec.describe "Items Search API" do
 
     it "returns a 400 error when min or max parameters are less than 0" do
       get "/api/v1/items/find_all?min_price=-1&max_price=4"
-      
+
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
 

@@ -11,17 +11,17 @@ class ErrorSerializer
   end
 
   def error_message
-    if @error.message.include?(':')
-      @error.message.split(':')[0]
+    if @error.message.include?(":")
+      @error.message.split(":")[0]
     else
       "your query could not be completed"
     end
   end
 
   def parse_error_message
-    return [@error.message] unless @error.message.include?(':')
+    return [@error.message] unless @error.message.include?(":")
 
-    colon_index = @error.message.index(':')
-    @error.message[(colon_index+2)..-1].split(', ')
+    colon_index = @error.message.index(":")
+    @error.message[(colon_index + 2)..-1].split(", ")
   end
 end

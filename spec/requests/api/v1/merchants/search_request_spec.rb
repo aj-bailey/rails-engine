@@ -21,7 +21,7 @@ RSpec.describe "Merchants Search API" do
       expect(merchant[:data][:attributes][:name]).to be_a(String)
     end
 
-    it 'sends a 400 status error with merchant object when no name parameters are given' do
+    it "sends a 400 status error with merchant object when no name parameters are given" do
       get "/api/v1/merchants/find?name="
 
       expect(response.status).to eq(400)
@@ -32,7 +32,7 @@ RSpec.describe "Merchants Search API" do
       expect(merchant[:errors]).to eq(["Missing query parameter"])
     end
 
-    it 'sends a 200 status code with empty object when no results found' do
+    it "sends a 200 status code with empty object when no results found" do
       get "/api/v1/merchants/find?name=asdf"
 
       expect(response.status).to eq(200)

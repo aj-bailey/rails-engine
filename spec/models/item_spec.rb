@@ -24,7 +24,7 @@ RSpec.describe Item, type: :model do
         @gold_ring = create(:item, name: "Gold Ring")
         @thing = create(:item, name: "Thing")
       end
-  
+
       it "returns the first merchant found from alphabetical order results from case-insensitive keyword" do
         expect(Item.find_items_by_name("ring")).to eq([@gold_ring, @turing_hat, @turing_shirt])
         expect(Item.find_items_by_name("RiNg")).to eq([@gold_ring, @turing_hat, @turing_shirt])
