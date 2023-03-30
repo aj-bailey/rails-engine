@@ -27,9 +27,8 @@ RSpec.describe "Merchants Search API" do
 
       merchant = JSON.parse(response.body, symbolize_names: true)
 
-      expect(merchant[:data][:id]).to eq(nil)
-      expect(merchant[:data][:type]).to eq("merchant")
-      expect(merchant[:data][:attributes][:name]).to eq(nil)
+      expect(merchant[:message]).to eq("param is missing or the value is empty")
+      expect(merchant[:errors]).to eq(["Missing query parameter"])
     end
 
     it 'sends a 200 status code with empty object when no results found' do

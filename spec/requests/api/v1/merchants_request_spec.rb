@@ -48,9 +48,8 @@ RSpec.describe 'Merchant API' do
 
       parsed_merchant = JSON.parse(response.body, symbolize_names: true)
 
-      expect(parsed_merchant[:data][:id]).to eq(nil)
-      expect(parsed_merchant[:data][:type]).to eq("merchant")
-      expect(parsed_merchant[:data][:attributes][:name]).to eq(nil)
+      expect(parsed_merchant[:message]).to eq("your query could not be completed")
+      expect(parsed_merchant[:errors]).to eq(["Couldn't find Merchant with 'id'=1"])
     end
   end
 end

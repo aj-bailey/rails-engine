@@ -64,12 +64,8 @@ RSpec.describe 'Items API' do
 
       parsed_item = JSON.parse(response.body, symbolize_names: true)
 
-      expect(parsed_item[:data][:id]).to eq(nil)
-      expect(parsed_item[:data][:type]).to eq("item")
-      expect(parsed_item[:data][:attributes][:name]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:description]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:unit_price]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:merchant_id]).to eq(nil)
+      expect(parsed_item[:message]).to eq("your query could not be completed")
+      expect(parsed_item[:errors]).to eq(["Couldn't find Item with 'id'=1"])
     end
   end
 
@@ -98,7 +94,6 @@ RSpec.describe 'Items API' do
     it "sends a 400 Bad Request status error when at least one but not all parameters are missing" do
       merchant = create(:merchant)
       item_params = ({
-                      description: "Item Description",
                       unit_price: 3.99,
                       merchant_id: merchant.id
                     })
@@ -111,12 +106,8 @@ RSpec.describe 'Items API' do
 
       parsed_item = JSON.parse(response.body, symbolize_names: true)
 
-      expect(parsed_item[:data][:id]).to eq(nil)
-      expect(parsed_item[:data][:type]).to eq("item")
-      expect(parsed_item[:data][:attributes][:name]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:description]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:unit_price]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:merchant_id]).to eq(nil)
+      expect(parsed_item[:message]).to eq("Validation failed")
+      expect(parsed_item[:errors]).to eq(["Name can't be blank", "Description can't be blank"])
     end
 
     it "sends a 400 Bad Request status error when at least one parameter is incorrect data type" do
@@ -137,12 +128,8 @@ RSpec.describe 'Items API' do
 
       parsed_item = JSON.parse(response.body, symbolize_names: true)
 
-      expect(parsed_item[:data][:id]).to eq(nil)
-      expect(parsed_item[:data][:type]).to eq("item")
-      expect(parsed_item[:data][:attributes][:name]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:description]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:unit_price]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:merchant_id]).to eq(nil)
+      expect(parsed_item[:message]).to eq("Validation failed")
+      expect(parsed_item[:errors]).to eq(["Unit price is not a number"])
     end
 
     it "sends a 400 Bad Request status error when no parameters are submitted" do
@@ -152,12 +139,8 @@ RSpec.describe 'Items API' do
       
       parsed_item = JSON.parse(response.body, symbolize_names: true)
 
-      expect(parsed_item[:data][:id]).to eq(nil)
-      expect(parsed_item[:data][:type]).to eq("item")
-      expect(parsed_item[:data][:attributes][:name]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:description]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:unit_price]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:merchant_id]).to eq(nil)
+      expect(parsed_item[:message]).to eq("param is missing or the value is empty")
+      expect(parsed_item[:errors]).to eq(["item"])
     end
   end
 
@@ -181,12 +164,8 @@ RSpec.describe 'Items API' do
 
       parsed_item = JSON.parse(response.body, symbolize_names: true)
 
-      expect(parsed_item[:data][:id]).to eq(nil)
-      expect(parsed_item[:data][:type]).to eq("item")
-      expect(parsed_item[:data][:attributes][:name]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:description]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:unit_price]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:merchant_id]).to eq(nil)
+      expect(parsed_item[:message]).to eq("your query could not be completed")
+      expect(parsed_item[:errors]).to eq(["Couldn't find Item with 'id'=1"])
     end
 
     it "deletes associated invoices that only have this item on it" do
@@ -239,12 +218,8 @@ RSpec.describe 'Items API' do
 
       parsed_item = JSON.parse(response.body, symbolize_names: true)
 
-      expect(parsed_item[:data][:id]).to eq(nil)
-      expect(parsed_item[:data][:type]).to eq("item")
-      expect(parsed_item[:data][:attributes][:name]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:description]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:unit_price]).to eq(nil)
-      expect(parsed_item[:data][:attributes][:merchant_id]).to eq(nil)
+      expect(parsed_item[:message]).to eq("your query could not be completed")
+      expect(parsed_item[:errors]).to eq(["Couldn't find Item with 'id'=1"])
     end
   end
 end
