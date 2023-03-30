@@ -48,6 +48,7 @@ RSpec.describe "Items Search API" do
 
       expect(items[:data].count).to eq(0)
     end
+
     context "Pricing Parameters" do
       before(:each) do
         @turing_hat = create(:item, name: "Turing Hat", unit_price: 19.99)
@@ -168,7 +169,43 @@ RSpec.describe "Items Search API" do
 
     it "returns a 400 error when min or max parameters are less than 0" do
       get "/api/v1/items/find_all?min_price=-1"
-      # binding.pry
+      
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(item[:message]).to eq("your query could not be completed")
+      expect(item[:errors]).to eq(["Invalid query parameters"])
+    end
+
+    it "returns a 400 error when max parameters are less than 0" do
+      get "/api/v1/items/find_all?max_price=-1"
+      
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(item[:message]).to eq("your query could not be completed")
+      expect(item[:errors]).to eq(["Invalid query parameters"])
+    end
+
+    it "returns a 400 error when min or max parameters are less than 0" do
+      get "/api/v1/items/find_all?min_price=-1&max_price=4"
+      
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(item[:message]).to eq("your query could not be completed")
+      expect(item[:errors]).to eq(["Invalid query parameters"])
+    end
+
+    it "returns a 400 error when no query parameters are included" do
+      get "/api/v1/items/find_all"
+
       expect(response).to_not be_successful
       expect(response.status).to eq(400)
 
