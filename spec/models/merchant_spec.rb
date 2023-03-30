@@ -13,7 +13,7 @@ RSpec.describe Merchant, type: :model do
       @thing_world = create(:merchant, name: "Thing World")
     end
 
-    it 'returns the first merchant found from case-insensitive alphabetical order results from case-insensitive keyword' do
+    it 'returns the first merchant found from alphabetical order results from case-insensitive keyword' do
       expect(Merchant.find_merchant("ring")).to eq(@ring_world)
       expect(Merchant.find_merchant("RiNg")).to eq(@ring_world)
     end
