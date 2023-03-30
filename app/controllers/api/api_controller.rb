@@ -2,6 +2,7 @@ class Api::ApiController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :error_response
   rescue_from ActiveRecord::RecordInvalid, with: :error_response
   rescue_from ActionController::ParameterMissing, with: :error_response
+  rescue_from ActionController::BadRequest, with: :error_response
 
   def error_response(exception)
     render json: ErrorSerializer.new(exception).serialized_json, status: error_status(exception)
