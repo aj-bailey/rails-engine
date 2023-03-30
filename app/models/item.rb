@@ -8,21 +8,21 @@ class Item < ApplicationRecord
 
   def self.find_items_by_name(keyword)
     where("name ILIKE ?", "%#{keyword}%")
-    .order(:name)
+      .order(:name)
   end
 
   def self.find_items_above_or_eq_price(price)
     where("unit_price >= ?", price)
-    .order(:name)
+      .order(:name)
   end
 
   def self.find_items_below_or_eq_price(price)
     where("unit_price <= ?", price)
-    .order(:name)
+      .order(:name)
   end
 
   def self.find_items_between_prices(min, max)
     where("unit_price >= ? AND unit_price <= ?", min, max)
-    .order(:name)
+      .order(:name)
   end
 end

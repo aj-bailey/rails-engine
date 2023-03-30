@@ -7,8 +7,8 @@ class Invoice < ApplicationRecord
 
   def self.single_item_invoices
     joins(:invoice_items)
-    .select("invoices.*, count(invoice_items.id)")
-    .group(:id)
-    .having('count(invoice_items.id) = ?', 1)
+      .select("invoices.*, count(invoice_items.id)")
+      .group(:id)
+      .having('count(invoice_items.id) = ?', 1)
   end
 end
