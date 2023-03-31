@@ -214,5 +214,17 @@ RSpec.describe "Items Search API" do
       expect(item[:message]).to eq("your query could not be completed")
       expect(item[:errors]).to eq(["Invalid query parameters"])
     end
+
+    it "returns a 400 error when name parameter is given without value" do
+      get "/api/v1/items/find_all?name"
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(400)
+
+      item = JSON.parse(response.body, symbolize_names: true)
+
+      expect(item[:message]).to eq("your query could not be completed")
+      expect(item[:errors]).to eq(["Invalid query parameters"])
+    end
   end
 end
