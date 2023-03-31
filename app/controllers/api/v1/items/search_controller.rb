@@ -12,13 +12,13 @@ class Api::V1::Items::SearchController < Api::ApiController
 
   def execute_query
     if name_param?
-      Item.find_items_by_name(params[:name])
+      name_query
     elsif min_price_param? && max_price_param?
-      min_and_max_price
+      min_and_max_price_query
     elsif min_price_param?
-      min_price
+      min_price_query
     elsif max_price_param?
-      max_price
+      max_price_query
     end
   end
 
@@ -32,19 +32,25 @@ class Api::V1::Items::SearchController < Api::ApiController
     true
   end
 
-  def min_and_max_price
+  def name_query
+    return Item.find_items_by_name(params[:name]) if params[:name].present?
+
+    raise ActionController::BadRequest.new, "Invalid query parameters"
+  end
+
+  def min_and_max_price_query
     return Item.find_items_between_prices(params[:min_price], params[:max_price]) if valid_price?
 
     raise ActionController::BadRequest.new, "Invalid query parameters"
   end
 
-  def min_price
+  def min_price_query
     return Item.find_items_above_or_eq_price(params[:min_price]) if valid_price?
 
     raise ActionController::BadRequest.new, "Invalid query parameters"
   end
 
-  def max_price
+  def max_price_query
     return Item.find_items_below_or_eq_price(params[:max_price]) if valid_price?
 
     raise ActionController::BadRequest.new, "Invalid query parameters"
