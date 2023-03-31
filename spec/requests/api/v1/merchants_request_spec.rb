@@ -26,13 +26,13 @@ RSpec.describe "Merchant API" do
       before(:each) do
         @merchant_1 = create(:merchant)
         create_list(:merchant, 9)
-  
+
         @merchant_11 = create(:merchant)
         create_list(:merchant, 9)
-  
+
         @merchant_21 = create(:merchant)
         create_list(:merchant, 19)
-  
+
         @merchant_41 = create(:merchant)
       end
 
@@ -40,7 +40,7 @@ RSpec.describe "Merchant API" do
         get "/api/v1/merchants?page=2"
 
         expect(response).to be_successful
-        
+
         merchants = JSON.parse(response.body, symbolize_names: true)
 
         expect(merchants[:data].count).to eq(20)
@@ -51,7 +51,7 @@ RSpec.describe "Merchant API" do
         get "/api/v1/merchants?per_page=10"
 
         expect(response).to be_successful
-        
+
         merchants = JSON.parse(response.body, symbolize_names: true)
 
         expect(merchants[:data].count).to eq(10)
@@ -62,7 +62,7 @@ RSpec.describe "Merchant API" do
         get "/api/v1/merchants?page=2&per_page=10"
 
         expect(response).to be_successful
-        
+
         merchants = JSON.parse(response.body, symbolize_names: true)
 
         expect(merchants[:data].count).to eq(10)
@@ -74,7 +74,7 @@ RSpec.describe "Merchant API" do
 
         expect(response).to_not be_successful
         expect(response.status).to eq(400)
-        
+
         merchants = JSON.parse(response.body, symbolize_names: true)
 
         expect(merchants[:message]).to eq("your query could not be completed")
@@ -86,7 +86,7 @@ RSpec.describe "Merchant API" do
 
         expect(response).to_not be_successful
         expect(response.status).to eq(400)
-        
+
         merchants = JSON.parse(response.body, symbolize_names: true)
 
         expect(merchants[:message]).to eq("your query could not be completed")

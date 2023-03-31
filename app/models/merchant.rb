@@ -12,10 +12,10 @@ class Merchant < ApplicationRecord
       .order(:name)
       .first
   end
-  
+
   def self.paginate(paginate_params = {})
     paginate_params = DEFAULT_PAGINATE.merge(paginate_params)
-    
+
     offset = (paginate_params[:page] - 1) * paginate_params[:per_page]
 
     limit(paginate_params[:per_page])
